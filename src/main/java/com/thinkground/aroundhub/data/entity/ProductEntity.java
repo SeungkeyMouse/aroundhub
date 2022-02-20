@@ -3,9 +3,7 @@ package com.thinkground.aroundhub.data.entity;
 import com.thinkground.aroundhub.data.dto.ProductDto;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -13,17 +11,24 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @Table(name = "product")
-public class ProductEntity {
+public class ProductEntity extends BaseEntity {
     @Id
     String productId;//primaryKey
 
     String productName;
-    int productPrice;
-    int productStock;
 
-    public ProductDto toDto(){
+    Integer productPrice;
+
+    Integer productStock;
+
+    public ProductDto toDto() {
         return ProductDto.builder()
+                .productId(productId)
+                .productName(productName)
+                .productPrice(productPrice)
+                .productStock(productStock)
                 .build();
     }
 }
